@@ -1,0 +1,55 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #12100D;
+  font-family: 'Work Sans', sans-serif;
+  color: white;
+}
+
+header {
+  background-color: #850F0F;
+  padding: 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+main {
+  padding: 40px;
+}
+
+.acciones h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+.botones {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.botones a {
+  background-color: #1e1c19;
+  color: white;
+  padding: 15px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.botones a:hover {
+  background-color: #333;
+}
+
+footer {
+  background-color: #1e1c19;
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+}

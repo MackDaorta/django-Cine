@@ -1,0 +1,61 @@
+{% extends 'core/base.html' %}
+{% load static %} 
+{% block title %}Conocenos - Cinemarkñ{% endblock %}
+{% block page_css %}
+<link rel="stylesheet" href="{% static 'core\conocenos.css' %}">
+{% endblock %}
+{% block content %}
+<div class='primary'>
+<main>
+        <div class="contentConocenos">
+        <!-- Historia -->
+        <section class="section">
+          <img src="recursos/history.jpg" alt="Historia Cine" />
+          <div class="section-content">
+            <h2>Nuestra Historia</h2>
+            <p>
+              Desde nuestros inicios hemos buscado ofrecer experiencias
+              inolvidables en cada función. Inspirados en la pasión por el
+              séptimo arte, hemos crecido como un espacio donde el
+              entretenimiento y la comodidad se unen para crear recuerdos únicos
+              con cada película proyectada.
+            </p>
+          </div>
+        </section>
+
+            <!-- Trabaja con nosotros -->
+        <section class="section">
+          <img src="recursos/empleados.jpg" alt="Trabaja con nosotros" />
+          <div class="section-content">
+            <h2>Trabaja con Nosotros</h2>
+            <p>
+              ¿Te apasiona el cine y el trabajo en equipo? Únete a nuestra
+              familia y sé parte de una experiencia que transforma cada función
+              en un momento especial para miles de personas.
+            </p>
+            <a href="#" class="btn">Enviar Solicitud</a>
+          </div>
+        </section>
+        <!-- Misión y Visión -->
+        <section class="section">
+          <img src="recursos/vision.jpg" alt="Misión y Visión" />
+          <div class="section-content">
+            <h2>Misión y Visión</h2>
+            <p>
+              <strong>Misión:</strong> Brindar experiencias de cine de alta
+              calidad, conectando a las personas con historias que inspiran,
+              emocionan y divierten.
+            </p>
+            <p>
+              <strong>Visión:</strong> Ser reconocidos como el principal espacio
+              de entretenimiento cinematográfico, innovando constantemente para
+              llevar la magia del cine a nuevas generaciones.
+            </p>
+          </div>
+        </section>
+
+
+        </div>
+    </main>
+</div>
+{% endblock %}

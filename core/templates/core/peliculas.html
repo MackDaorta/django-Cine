@@ -1,0 +1,64 @@
+{% extends 'core/base.html' %}
+{% load static %} 
+
+{% block title %}Películas - Cinemark{% endblock %}
+{% block page_css %}
+<link rel="stylesheet" href="{% static 'core/cartelera.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main>
+        <h2 class="titulo">Películas en cartelera</h2>
+        <div class="cartelera-grid">
+            <div class="pelicula">
+                <img src="recursos/spiderman.jpg" alt="Película 1">
+                <h3>Spiderman</h3>
+                <p>Tipo de boleto: General</p>
+                <p>Restricciones: +14</p>
+                <p>Duración: 148 min</p>
+                <p>Genero: Acción, Aventura, Ciencia ficción</p>
+            </div>
+            <div class="pelicula">
+                <img src="recursos/pixeles.jpg" alt="Película 2">
+                <h3>Pixeles</h3>
+                <p>Tipo de boleto: General</p>
+                <p>Restricciones: +7</p>
+                <p>Duración: 106 min</p>
+                <p>Genero: Ciencia ficción, Comedia, Acción</p>
+            </div>
+            <div class="pelicula">
+                <img src="recursos/rubias.jpg" alt="Película 3">
+                <h3>¿Y dónde están las rubias?</h3>
+                <p>Tipo de boleto: Gneral</p>
+                <p>Restricciones: +14</p>
+                <p>Duración: 109 min</p>
+                <p>Genero: Comedia</p>
+            </div>
+            <div class="pelicula">
+                <img src="recursos/niños.jpg" alt="Película 4">
+                <h3>Son como niños 2</h3>
+                <p>Tipo de boleto: General</p>
+                <p>Restricciones: +14</p>
+                <p>Duración: 101 min</p>
+                <p>Genero: Comedia</p>
+            </div>
+            <div class="pelicula">
+                <img src="recursos/harry.jpg" alt="Película 5">
+                <h3>Harry Potter</h3>
+                <p>Tipo de boleto: General</p>
+                <p>Restricciones: +7</p>
+                <p>Duración: 152 min</p>
+                <p>Genero: Fantasía, Aventura, Familiar</p>
+            </div>
+            <div class="pelicula">
+                <img src="recursos/terminator.jpg" alt="Película 6">
+                <h3>Terminator</h3>
+                <p>Tipo de boleto: General</p>
+                <p>Restricciones: +16</p>
+                <p>Duración: 107 min</p>
+                <p>Genero: Ciencia ficción, Acción, Suspenso</p>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}

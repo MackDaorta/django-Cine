@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+{% load static %} 
+
+{% block title %}Inicio - Cinemark{% endblock %}
+{% block page_css %}
+<link rel="stylesheet" href="{% static 'core/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class ="primera">
+        <img src="recursos/6c7228564c13f8ba862232b5ed2c7fc2.jpg" alt="pelicula.png">
+        <div class= "info">
+            <h3>Demon Slayer: Kimetsu no Yaiba - Castillo infinito</h3>
+            <a href="Cartelera.html" target="_blank">Funciones</a>    
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class = "promociones">
+        <h2>Promociones</h2>
+        <div class="fotos">
+            <img src="recursos/ofertas-cinemark-new1-906.jpg" alt="promocion1.png" >
+            <img src="recursos/oferta2.jpeg" alt="promocion2.png" >
+            <img src="recursos/oferta3.jpeg" alt="promocion3.png" >
+        </div>
+    </div>
+
+{% endblock %}

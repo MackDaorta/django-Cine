@@ -1,0 +1,100 @@
+{% extends 'core/base.html' %}
+{% load static %} 
+{% block title %}Inicio - Cinemark{% endblock %}
+{% block page_css %}
+<link rel="stylesheet" href="{% static 'core/Sala.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="main-content">
+        <!-- SECCIÓN DE SALAS -->
+        <h2 class="section-title">Nuestras Salas</h2>
+        <div class="salas-grid">
+            <!-- Sala XD -->
+            <div class="sala-card">
+                <div class="sala-header">
+                    <h3>Sala XD (Extreme Digital)</h3>
+                </div>
+                <div class="sala-body">
+                    <img src="https://assets.cinemark-core.com/5db771be04daec00076df3f5/content/generic/5e2b55453b1264000865d01c/desktop/web-1-pantalla-xd-1677679533626.jpg" alt="Sala XD" class="sala-image-placeholder" style="background-color: #0d47a1;"> 
+                    <div class="sala-info">
+                        <p><strong>Descripción:</strong> Pantalla gigante, sonido inmersivo y potente. La experiencia más envolvente.</p>
+                        <p><strong>Ideal para:</strong> Películas de acción y blockbusters.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Sala DBOX -->
+            <div class="sala-card">
+                <div class="sala-header">
+                    <h3>Sala DBOX</h3>
+                </div>
+                <div class="sala-body">
+                    <img src="https://assets.cinemark-core.com/5db771be04daec00076df3f5/content/generic/5e2b4fc280ad190008fcde3c/desktop/web-1-d-box-1677679623421.jpg" alt="Sala DBOX" class="sala-image-placeholder" style="background-color: #2e7d32;"> 
+                    <div class="sala-info">
+                        <p><strong>Descripción:</strong> Asientos de movimiento que se sincronizan con la acción de la película.</p>
+                        <p><strong>Ideal para:</strong> Sentir la película, desde persecuciones hasta explosiones.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Sala 3D -->
+            <div class="sala-card">
+                <div class="sala-header">
+                    <h3>Sala 3D</h3>
+                </div>
+                <div class="sala-body">
+                    <!-- PUNTO PARA IMAGEN 3: Sala 3D -->
+                    <img src="https://produccionaudiovisual.com/wp-content/uploads/2018/05/3d-cine.jpg" alt="Sala 3D" class="sala-image-placeholder" style="background-color: #ef6c00;"> 
+                    <div class="sala-info">
+                        <p><strong>Descripción:</strong> Proyección estereoscópica para una profundidad de imagen realista.</p>
+                        <p><strong>Ideal para:</strong> Experiencias visuales que saltan de la pantalla.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Sala 2D Clásica -->
+            <div class="sala-card">
+                <div class="sala-header">
+                    <h3>Sala 2D</h3>
+                </div>
+                <div class="sala-body">
+                    <img src="https://los40.com/resizer/v2/5NZHI34LWBPPBIEO36EEG4P3O4.jpg?auth=c26b1273b79f9dc86b7493de11211d4b2717b9124d261ed57011a881f3501ca0&quality=70&width=1200&height=675&smart=true" alt="Sala 2D" class="sala-image-placeholder" style="background-color: #5d4037;"> 
+                    <div class="sala-info">
+                        <p><strong>Descripción:</strong> Proyección digital de alta calidad con el audio y comodidad clásica.</p>
+                        <p><strong>Ideal para:</strong> Todos los estrenos y disfrutar del cine tradicional.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECCIÓN DE CARTELERA CON PELÍCULAS -->
+        <h2 class="section-title">Cartelera Destacada</h2>
+        
+        <div class="cartelera-list">
+            
+            <!-- Película 1 -->
+            <div class="movie-item">
+                <h4>¿Y dónde están las rubias?</h4>
+                <button class="movie-button">Ver Horarios</button>
+            </div>
+            
+            <!-- Película 2 -->
+            <div class="movie-item">
+                <h4>Son como niños</h4>
+                <button class="movie-button">Ver Horarios</button>
+            </div>
+            
+            <!-- Película 3 -->
+            <div class="movie-item">
+                <h4>Harry Potter</h4>
+                <button class="movie-button">Ver Horarios</button>
+            </div>
+            
+            <!-- Película 4 -->
+            <div class="movie-item">
+                <h4>Terminator</h4>
+                <button class="movie-button">Ver Horarios</button>
+            </div>
+        </div>
+
+</div>
+
+{% endblock %}
