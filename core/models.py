@@ -18,13 +18,13 @@ class Producto(models.Model):
 
     imagen= models.ImageField(upload_to='productos/',verbose_name='Imagen referencial')
 
-    categoria=models.CharField(max_length=50, choices=CATEGORIAS, default='Otro', verbose_name='Categoria')
+    categoria=models.CharField(max_length=50, choices=CATEGORIAS, default='OTRO', verbose_name='Categoria')
     
     disponible=models.BooleanField(default=True,verbose_name='Disponible')
 
     def __str__ (self):
 
-        return f"[{self.get_categoria_display()}] {self.nombre} - S/.{self.precio} \nid:{self.id}"
+        return f"[{self.get_categoria_display()}]  {self.nombre} - S/.{self.precio}"
 
 class Peliculas(models.Model):
     RESTRICCIONES = [
@@ -42,12 +42,12 @@ class Peliculas(models.Model):
     restricciones=models.CharField(max_length=30, choices=RESTRICCIONES,verbose_name='restricciones')
 
     def __str__(self):
-        return f'{self.nombre} ({self.restricciones}) \nid: {self.id}'
+        return f'{self.nombre} ({self.restricciones}) '
 
-class Anuncios(models.Model):
+class Anuncio(models.Model):
     id=models.UUIDField(primary_key=True, default=uuid4, editable=False)
     nombre= models.CharField(max_length=100,verbose_name='Nombre del anuncio')
-    imagen= models.ImageField(storage='anuncios/', verbose_name='anuncios')
+    imagen= models.ImageField(upload_to='anuncios/', verbose_name='anuncios')
 
     def __str__(self):
-        return f'nombre:{self.nombre} \n id'
+        return f'nombre:{self.nombre} id:{self.id}'
