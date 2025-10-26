@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Panel de Administración</title>
-  <link rel="stylesheet" href="{% static 'core\admin.css' %}">
+  <link rel="stylesheet" href="{% static 'core/admin.css' %}">
 </head>
 <body>
   <header>
@@ -16,10 +16,10 @@
     <section class="acciones">
       <h2>Gestión de Contenido</h2>
       <div class="botones">
-        <a href="productos.html">Registrar producto o contenido</a>
-        <a href="#">Modificar producto o contenido</a>
-        <a href="#">Actualizar sliders/banner</a>
-        <a href="anuncios.html">Crear o editar anuncios informativos</a>
+        <a href="{% url 'admin_productos' %}">Administrar Productos</a>
+        <a href="{% url 'admin_peliculas' %}">Administrar Peliculas</a>
+        <a href="#">Gestionar sliders/banners</a>
+        <a href="{% url 'admin_anuncios' %}">Administrar anuncios</a>
       </div>
     </section>
   </main>

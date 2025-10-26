@@ -7,21 +7,36 @@
 {% endblock %}
 
 {% block content %}
-<div class ="primera">
-        <img src="recursos/6c7228564c13f8ba862232b5ed2c7fc2.jpg" alt="pelicula.png">
-        <div class= "info">
-            <h3>Demon Slayer: Kimetsu no Yaiba - Castillo infinito</h3>
-            <a href="Cartelera.html" target="_blank">Funciones</a>    
-        </div>
+<div class ="sliders">
+    {% for slider in sliders %}
+    <img src="{{ slider.image.url}}" alt="{{ slider.nombre }}">
+    <div class="info">
+        <h3>{{slider.nombre}}</h3>
+        {% if slider.link %}
+            <a href="{{slider.link}}" target="_blank">Funciones</a>
+        {% endif %}    
     </div>
+    {% empty %}
+        <p>No hay anuncios por ahora</p>
+    {% endfor %}
+</div>
+
     <br>
     <br>
     <div class = "promociones">
         <h2>Promociones</h2>
         <div class="fotos">
-            <img src="recursos/ofertas-cinemark-new1-906.jpg" alt="promocion1.png" >
-            <img src="recursos/oferta2.jpeg" alt="promocion2.png" >
-            <img src="recursos/oferta3.jpeg" alt="promocion3.png" >
+        {% for promo in promociones %}
+            {% if promo.link %}
+            <a href="{{ promo.link }}" target="_blank">
+                <img src="{{ promo.imagen.url }}" alt="{{ promo.nombre }}">
+            </a>
+            {% else %}
+                <img src="{{ promo.imagen.url }}" alt="{{promo.nombre }}">
+            {% endif %}
+        {% empty %}
+            <p>No hay promociones</p>
+        {% endfor %}
         </div>
     </div>
 

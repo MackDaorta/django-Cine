@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     
     <title>{% block title %}Cinemark{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'core\style.css' %}">
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
 
     {% block page_css %}
     {% endblock %}
@@ -22,7 +22,17 @@
         <a href="{% url 'productos'%}">Confiteria</a>
         <a href="{% url 'conocenos' %}">Conocenos</a>
         <a href="{% url 'ubicanos' %}" >Ubicanos</a>
-        <a href="{% url 'login' %}" class="principal">Ingresar</a>
+        {% if user.is_authenticated %}
+        
+        {% if user.is_staff %}
+            <a href="{% url 'admin_panel' %}">Panel Admin</a>
+        {% endif %}
+
+        <a href="{% url 'logout' %}">Cerrar Sesión ({{ user.username }})</a>
+
+    {% else %}
+        <a href="{% url 'login' %}">Iniciar Sesión</a>
+    {% endif %}
     </nav>
 </header>
 {% block content %}
