@@ -15,4 +15,5 @@ urlpatterns = [
     path('mi-admin/peliculas/',views.admin_peliculas,name='admin_peliculas'),
     path('mi-admin/anuncios/',views.admin_anuncios,name='admin_anuncios' ),
     path('logout/', views.logout,name='logout'),
+    path('mi-admin/anuncios/eliminar/<uuid:id>/', views.admin_anuncio_eliminar, name='admin_anuncio_eliminar'),
 ]

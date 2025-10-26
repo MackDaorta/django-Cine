@@ -54,6 +54,7 @@ class Anuncio(models.Model):
     imagen= models.ImageField(upload_to='anuncios/', verbose_name='anuncios')
     tipo=models.CharField(max_length=50,choices=CATEGORIAS,verbose_name='tipo')
     link=models.URLField(max_length=255,blank=True,null=True,verbose_name='Enlace')
+    vigencia=models.DateField(blank=True,null=True,verbose_name='Fecha de Vigencia')
 
     def __str__(self):
-        return f'[{self.get_tipo_display()}] {self.nombres}'
+        return f'[{self.get_tipo_display()}] {self.nombre}'

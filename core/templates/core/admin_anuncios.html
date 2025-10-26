@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">  
+<title>Gestión de Anuncios y Promociones</title>
+<link rel="stylesheet" href="{% static 'core/style.css'  %}"> 
+<link rel="stylesheet" href="{% static 'core/admin.css' %}">
+<link rel="stylesheet" href="{% static 'core/anuncio.css' %}">
+
+</head>
+<body>
+<header>
+<h1>Panel de Administración Cinemark</h1>
+</header>
+
+<main class="main-content">
+    <div class="form-container">
+        <h2>Creación y Edición de Promociones</h2>
+
+        <form id="form-promocion" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="titulo">Título del Anuncio (Ej: 2x1 en Confitería)</label>
+            <input type="text" id="titulo" name='nombre' placeholder="Ingrese título" required>
+        </div>
+
+        <div class="form-group">
+            <label for="tipo">Tipo de Anuncio (Ubicación en Home)</label>
+            <select id="tipo" name="tipo" required>
+            <option value="">Seleccione dónde se mostrará</option>
+            <option value="SLIDER">Slider (Arriba en el Home)</option>
+            <option value="PROMOCION">Promoción (Abajo en el Home)</option>
+        </select>
+        </div>
+
+        <div class="form-group">
+            <label for="imagen-file">Subir Archivo de Imagen:</label>
+            <input type="file" id="imagen-file" name="imagen" accept="image/*" required>
+        </div>
+
+        <div class="form-group">
+            <label for="vigencia">Fecha de Vigencia (opcional)</label>
+            <input type="date" id="vigencia" name="vigencia">
+        </div>
+        
+        <button type="submit" class="btn-action">Guardar Promoción</button>
+        </form>
+
+        <div class="promotions-list">
+        <h2>Promociones Activas</h2>
+        
+        {% for anuncio in anuncios %}
+            <div class="promotion-item">
+                <span>{{ anuncio.nombre }}</span>
+                <div class="actions">
+                    <a href="{% url 'admin_anuncio_eliminar' anuncio.id %}" class="btn-delete">Eliminar</a>
+                </div>
+            </div>
+        {% empty %}
+        <p> No hay anuncios creados todavia</p>
+        {% endfor %}
+        
+        </div>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,92 @@
+.form-container {
+        max-width: 800px;
+        margin: 30px auto;
+        padding: 20px;
+        background-color: #1e1c19; 
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+    .form-container h2 {
+        color: #850F0F;
+        border-bottom: 2px solid #850F0F;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+    .form-group label {
+        display: block;
+        color: whitesmoke;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    .form-group input[type="text"],
+    .form-group textarea,
+    .form-group input[type="date"],
+    .form-group select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #333;
+        background-color: #12100D;
+        color: whitesmoke;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    
+    .form-group input[type="file"] {
+        background-color: #333;
+        border: 1px dashed #850F0F; 
+        padding: 10px;
+        margin-bottom: 20px;
+        width: 100%;
+        color: whitesmoke;
+        border-radius: 5px;
+    }
+
+    .form-group textarea {
+        resize: vertical;
+        height: 100px;
+    }
+    .btn-action {
+        background-color: #850F0F;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+    .btn-action:hover {
+        background-color: #B71C1C;
+    }
+    .promotions-list {
+        margin-top: 40px;
+    }
+    .promotion-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        margin-bottom: 10px;
+        background-color: #12100D;
+        border-left: 5px solid #850F0F;
+        border-radius: 5px;
+        color: whitesmoke;
+    }
+    .promotion-item .actions button {
+        margin-left: 10px;
+        padding: 5px 10px;
+        border-radius: 3px;
+        font-size: 14px;
+    }
+    .btn-edit {
+        background-color: #007bff;
+        color: white;
+        border: none;
+    }
+    .btn-delete {
+        background-color: #dc3545;
+        color: white;
+        border: none;
+    }

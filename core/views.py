@@ -13,7 +13,7 @@ def home(request):
         'sliders': lista_sliders,
         'promociones': lista_promociones
     }
-    return render(request, 'core/home.html')
+    return render(request, 'core/home.html',context)
 
 def conocenos(request):
     return render(request, 'core/conocenos.html')
@@ -60,17 +60,17 @@ def admin_panel(request):
 
 @user_passes_test(es_admin, login_url='/login/')
 def admin_productos(request):
-    from .models import Producto
+    
     productos=Producto.objects.all()
 
     context={
-        'productos':Producto
+        'productos':productos
     }
     return render(request,'core/admin_productos.html',context)
 
 @user_passes_test(es_admin, login_url='/login/')
 def admin_peliculas(request):
-    from .models import Peliculas
+    
     peliculas=Peliculas.objects.all()
     context={
         'peliculas': peliculas
@@ -79,11 +79,33 @@ def admin_peliculas(request):
 
 @user_passes_test(es_admin, login_url='/login/')
 def admin_anuncios(request):
-    from .models import Anuncio
-    anuncios=Anuncio.objects.all()
+    
+    if request.method=='POST':
+        nombre=request.POST.get('nombre')
+        vigencia=request.POST.get('vigencia')
+        tipo=request.POST.get('tipo')
+        imagen=request.FILES.get('imagen')
+        if not vigencia:
+            vigencia= None
+        Anuncio.objects.create(
+            nombre=nombre,
+            tipo=tipo,
+            vigencia=vigencia,
+            imagen=imagen
+            )
+        return redirect('admin_anuncios')
+    anuncios=Anuncio.objects.all().order_by('tipo')
     context={
         'anuncios':anuncios
-    } 
+    }
+
     return render(request,'core/admin_anuncios.html',context)
 
+
+@user_passes_test(es_admin, login_url='/login/')
+def admin_anuncio_eliminar(request,id):
+    from django.shortcuts import get_object_or_404
+    anuncio=get_object_or_404(Anuncio,id=id)
+    anuncio.delete()
+    return redirect('admin_anuncios')
 
