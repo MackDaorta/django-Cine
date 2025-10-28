@@ -34,13 +34,13 @@ nav a {
 nav a.activo {
     text-decoration: underline;
 }
-nav a.principal {
+nav a.sliders {
     background-color: #850F0F;
     color: white;
     padding: 6px 12px;
     border-radius: 5px;
 }
-nav a.principal:hover {
+nav a.sliders:hover {
     background-color: #B71C1C;
     transition: background-color 0.3s ease;
 }

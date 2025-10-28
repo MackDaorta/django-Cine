@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from .models import Anuncio,Peliculas,Producto
+from django.urls import reverse
+from decimal import Decimal,InvalidOperation
 
 def es_admin(user):
     return user.is_authenticated and user.is_staff
@@ -60,12 +62,37 @@ def admin_panel(request):
 
 @user_passes_test(es_admin, login_url='/login/')
 def admin_productos(request):
-    
-    productos=Producto.objects.all()
-
+    error_message=None
+    if request.method=='POST':
+        nombre=request.POST.get('nombre')
+        descripcion=request.POST.get('descripcion')
+        precio_str=request.POST.get('precio')
+        imagen=request.FILES.get('imagen')
+        categoria=request.POST.get('categoria')
+        precio_decimal=None
+        try:
+            precio_decimal=Decimal(precio_str)
+        except(InvalidOperation,TypeError):
+            error_message='Ingrese un formato valido'
+        if error_message==None:
+            try:
+                Producto.objects.create(
+                    nombre=nombre,
+                    descripcion=descripcion,
+                    precio=precio_decimal,
+                    imagen=imagen,
+                    categoria=categoria
+                )
+                return redirect('admin_productos')
+            except Exception as e:
+                error_message=f'Error al guardar el producto: {e}'
+    productos=Producto.objects.all().order_by('categoria')
     context={
-        'productos':productos
+        'productos':productos,
+        'error':error_message
+
     }
+    
     return render(request,'core/admin_productos.html',context)
 
 @user_passes_test(es_admin, login_url='/login/')
@@ -85,14 +112,19 @@ def admin_anuncios(request):
         vigencia=request.POST.get('vigencia')
         tipo=request.POST.get('tipo')
         imagen=request.FILES.get('imagen')
+        link=request.POST.get('link')
+        if not link:
+            link= reverse('productos')
         if not vigencia:
             vigencia= None
         Anuncio.objects.create(
             nombre=nombre,
             tipo=tipo,
             vigencia=vigencia,
-            imagen=imagen
+            imagen=imagen,
+            link=link
             )
+
         return redirect('admin_anuncios')
     anuncios=Anuncio.objects.all().order_by('tipo')
     context={

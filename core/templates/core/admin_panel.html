@@ -1,17 +1,12 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panel de Administración</title>
-  <link rel="stylesheet" href="{% static 'core/admin.css' %}">
-</head>
-<body>
-  <header>
-    <h1>Panel de Administración Cinemark</h1>
-  </header>
+{% extends 'core/base.html' %}
+{% load static %} 
 
+{% block title %}Inicio - Cinemark{% endblock %}
+{% block page_css %}
+<link rel="stylesheet" href="{% static 'core/admin.css' %}">
+{% endblock %}
+
+{% block content %}
   <main>
     <section class="acciones">
       <h2>Gestión de Contenido</h2>
@@ -24,9 +19,4 @@
     </section>
   </main>
 
-  <footer>
-    <p>© 2025 Cinemark. Panel de administración.</p>
-  </footer>
-</body>
-</html>
-
+{% endblock %}  

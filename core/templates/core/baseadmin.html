@@ -1,0 +1,60 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    
+    <title>{% block title %}Cinemark-Admin Panel{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'core/style.css' %}">
+
+    {% block page_css %}
+    {% endblock %}
+    
+    
+    </head>
+<body>
+<header>
+    <img src="{% static 'core/imagenes/Cinemark-Logo.png' %}" alt="Logo de Cinemark" width="200px" height="100px">
+    <nav>
+        <a href="{% url 'home' %}" class="activo">Inicio</a>
+        <a href="{% url 'peliculas' %}">Cartelera</a>
+        <a href="{% url 'sala' %}">Salas</a>
+        <a href="{% url 'productos'%}">Confiteria</a>
+        <a href="{% url 'conocenos' %}">Conocenos</a>
+        <a href="{% url 'ubicanos' %}" >Ubicanos</a>
+        {% if user.is_authenticated %}
+        
+        {% if user.is_staff %}
+            <a href="{% url 'admin_panel' %}">Panel Admin</a>
+        {% endif %}
+
+        <a href="{% url 'logout' %}">Cerrar Sesión ({{ user.username }})</a>
+        {% endif %}
+    </nav>
+</header>
+{% block content %}
+{% endblock %}
+<div class= "siguenos">
+        <h5>Síguenos en nuestras redes sociales: </h5>
+        <div class="iconos">
+            <a href="https://www.facebook.com/CinemarkPeru" target="_blank">
+                <img src="{% static 'core/imagenes/20673.png' %}" alt="facebook.png" width="50px" height="50px">
+            </a>
+            <a href="https://www.instagram.com/cinemarkperu/?hl=es-la" target="_blank">
+                <img src="{% static 'core/imagenes/insta-logo.png' %}" alt="instagram.png" width="50px" height="50px">
+            </a>
+            <a href="https://www.tiktok.com/@cinemark.peru?lang=es" target="_blank">
+                <img src="{% static 'core/imagenes/1946552.png' %}" alt="tiktok.png" width="50px" height="50px">
+        </a>
+        </div>
+    </div>
+
+<footer>
+    <h3 class= "nombre">Cinemark</h3>
+    <p class="copi">© 2025 Cinemark. Todos los derechos reservados.</p>
+
+</footer>
+
+
+</body>
+</html>
