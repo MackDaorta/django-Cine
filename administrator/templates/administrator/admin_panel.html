@@ -3,7 +3,7 @@
 
 {% block title %}Inicio - Cinemark{% endblock %}
 {% block page_css %}
-<link rel="stylesheet" href="{% static 'core/admin.css' %}">
+<link rel="stylesheet" href="{% static 'administrator/admin.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -11,10 +11,10 @@
     <section class="acciones">
       <h2>Gestión de Contenido</h2>
       <div class="botones">
-        <a href="{% url 'admin_productos' %}">Administrar Productos</a>
-        <a href="{% url 'admin_peliculas' %}">Administrar Peliculas</a>
+        <a href="{% url 'administrator:admin_productos' %}">Administrar Productos</a>
+        <a href="{% url 'administrator:admin_peliculas' %}">Administrar Peliculas</a>
         <a href="#">Gestionar sliders/banners</a>
-        <a href="{% url 'admin_anuncios' %}">Administrar anuncios</a>
+        <a href="{% url 'administrator:admin_anuncios' %}">Administrar anuncios</a>
       </div>
     </section>
   </main>

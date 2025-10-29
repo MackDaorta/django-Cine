@@ -1,14 +1,15 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Cinemark</title>
-  <link rel="stylesheet" href="css/login.css">
+  <link rel="stylesheet" href="{% static 'core/login.css' %}">
 </head>
 <body>
 <div class="contenedor-login">
-    <form id="formulario-login" method="POST" action="{% url 'login' %}">
+    <form id="formulario-login" method="POST" action="{% url 'core:login' %}">
     {% csrf_token %}
     <h2>Iniciar Sesion</h2>
     <input type="text" id="usuario" name="username" placeholder="Usuario" required>

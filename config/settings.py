@@ -32,6 +32,9 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'core',
+    'peliculas',
+    'productos',
+    'administrator',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

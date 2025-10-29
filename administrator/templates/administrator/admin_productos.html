@@ -3,7 +3,7 @@
 
 {% block title %}Inicio - Cinemark{% endblock %}
 {% block page_css %}
-<link rel="stylesheet" href="{% static 'core/admin_productos.css' %}">
+<link rel="stylesheet" href="{% static 'administrator/admin_productos.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -26,7 +26,7 @@
             </div>
             <div class="form-group">
                 <label for="imagen">Imagen:</label>
-                <input type="text" id="imagen" name="imagen" required>
+                <input type="file" id="imagen" name="imagen" required>
             </div>
             <div class="from-group">
                 <label for="categoria">categoria</label>
@@ -46,21 +46,26 @@
         </form>
     </div>
     <div class="products-list">
-        <h2>Lista de Productos</h2>
-        <div id="productsContainer">
-        {% for producto in productos %}
-        <div class="promotion-item" style="display: flex; justify-content: space-between; align-items: center; padding: 10px; margin-bottom: 5px; background-color: #12100D; border-left: 3px solid #850F0F;">
-        <span>
-            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" height="40" style="margin-right: 10px; vertical-align: middle;">
+    <h2>Lista de Productos</h2>
+    <div id="productsContainer">
+      {% for producto in productos %}
+        <div class="promotion-item">
+          <span class="product-info">
+            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="product-image">
             {{ producto.nombre }} ({{ producto.get_categoria_display }}) - S/.{{ producto.precio }}
-        </span>
-        <div class="actions">
-            </div>
+          </span>
+          <div class="actions">
+            <a href="{% url 'administrator:admin_producto_editar' producto.id %}" class="btn-edit">Editar</a>
+            <form action="{% url 'administrator:admin_producto_eliminar' producto.id %}" method="POST" style="display: inline;" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este producto?');">
+                {% csrf_token %}
+                <button type="submit" class="btn-delete">Eliminar</button>
+            </form>
         </div>
-        {% empty %}
+        </div>
+      {% empty %}
         <p>No hay productos registrados todavía.</p>
-        {% endfor %}
-        </div>
+      {% endfor %}
     </div>
+  </div>
 </div>
 {% endblock %}

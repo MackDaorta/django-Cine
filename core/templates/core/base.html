@@ -16,22 +16,22 @@
 <header>
     <img src="{% static 'core/imagenes/Cinemark-Logo.png' %}" alt="Logo de Cinemark" width="200px" height="100px">
     <nav>
-        <a href="{% url 'home' %}" class="activo">Inicio</a>
-        <a href="{% url 'peliculas' %}">Cartelera</a>
-        <a href="{% url 'sala' %}">Salas</a>
-        <a href="{% url 'productos'%}">Confiteria</a>
-        <a href="{% url 'conocenos' %}">Conocenos</a>
-        <a href="{% url 'ubicanos' %}" >Ubicanos</a>
+        <a href="{% url 'core:home' %}" class="activo">Inicio</a>
+        <a href="{% url 'peliculas:peliculas' %}">Cartelera</a>
+        <a href="{% url 'core:sala' %}">Salas</a>
+        <a href="{% url 'productos:productos'%}">Confiteria</a>
+        <a href="{% url 'core:conocenos' %}">Conocenos</a>
+        <a href="{% url 'core:ubicanos' %}" >Ubicanos</a>
         {% if user.is_authenticated %}
         
         {% if user.is_staff %}
-            <a href="{% url 'admin_panel' %}">Panel Admin</a>
+            <a href="{% url 'administrator:admin_panel' %}">Panel Admin</a>
         {% endif %}
 
-        <a href="{% url 'logout' %}">Cerrar Sesión ({{ user.username }})</a>
+        <a href="{% url 'core:logout' %}">Cerrar Sesión ({{ user.username }})</a>
 
     {% else %}
-        <a href="{% url 'login' %}">Iniciar Sesión</a>
+        <a href="{% url 'core:login' %}">Iniciar Sesión</a>
     {% endif %}
     </nav>
 </header>

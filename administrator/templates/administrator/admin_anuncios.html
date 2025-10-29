@@ -5,9 +5,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">  
 <title>Gestión de Anuncios y Promociones</title>
-<link rel="stylesheet" href="{% static 'core/style.css'  %}"> 
-<link rel="stylesheet" href="{% static 'core/admin.css' %}">
-<link rel="stylesheet" href="{% static 'core/anuncio.css' %}">
+<link rel="stylesheet" href="{% static 'administrator/style.css'  %}"> 
+<link rel="stylesheet" href="{% static 'administrator/admin.css' %}">
+<link rel="stylesheet" href="{% static 'administrator/anuncio.css' %}">
 
 </head>
 <body>
@@ -41,7 +41,7 @@
         </div>
         <div class="form-group">
             <label for="link">Link</label>
-            <input type="url" id="link" name="link" required></input>
+            <input type="url" id="link" name="link"></input>
         </div>
 
         <div class="form-group">
@@ -59,7 +59,10 @@
             <div class="promotion-item">
                 <span>{{ anuncio.nombre }}</span>
                 <div class="actions">
-                    <a href="{% url 'admin_anuncio_eliminar' anuncio.id %}" class="btn-delete">Eliminar</a>
+                    <form action="{% url 'administrator:admin_anuncio_eliminar' anuncio.id %}" method="POST" style="display: inline;" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este anuncio?');">
+        {% csrf_token %}
+        <button type="submit" class="btn-delete">Eliminar</button>
+    </form>
                 </div>
             </div>
         {% empty %}
