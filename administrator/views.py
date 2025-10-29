@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.urls import reverse
 from decimal import Decimal,InvalidOperation
 from productos.models import Producto
-from peliculas.models import Peliculas
+from peliculas.models import Pelicula, Generos, Salas
 from .models import Anuncio
 
 
@@ -100,7 +100,7 @@ def admin_producto_eliminar(request,id):
 @user_passes_test(es_admin, login_url='/login/')
 def admin_peliculas(request):
     
-    peliculas=Peliculas.objects.all()
+    peliculas=Pelicula.objects.all()
     context={
         'peliculas': peliculas
     }

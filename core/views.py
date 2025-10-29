@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login as auth_login, logout as aut
 from django.urls import reverse
 from decimal import Decimal,InvalidOperation
 from administrator.models import Anuncio
+from peliculas.models import Salas
 
 
 
@@ -21,7 +22,11 @@ def conocenos(request):
     return render(request, 'core/conocenos.html')
 
 def sala(request):
-    return render(request,'core/sala.html')
+    lista_salas=Salas.objects.all()
+    context={
+        'salas':lista_salas
+    }
+    return render(request,'core/sala.html',context)
 
 def ubicanos(request):
     return render(request,'core/ubicanos.html')
@@ -38,7 +43,7 @@ def login(request):
             if user.is_staff:
                 return redirect('administrator:admin_panel')
             else:
-                return redirect('home')
+                return redirect('core:home')
         else:
             error_message='Usuario o contraseña incorrectos'
     context={
@@ -48,4 +53,4 @@ def login(request):
 
 def logout(request):
     auth_logout(request)
-    return redirect('home')
+    return redirect('core:home')
