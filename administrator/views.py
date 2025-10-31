@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import user_passes_test
 from django.urls import reverse
 from decimal import Decimal,InvalidOperation
 from productos.models import Producto
-from peliculas.models import Pelicula, Generos, Salas
+from peliculas.models import Pelicula, Genero, Sala
 from .models import Anuncio
 
 
@@ -95,16 +95,108 @@ def admin_producto_eliminar(request,id):
         producto.delete()
         return redirect('administrator:admin_productos')
     return redirect('administrator:admin_productos')
+###CRUD SALAS
+@user_passes_test(es_admin, login_url='/login/')
+def admin_salas(request):
+    if request.method=='POST':
+        nombre=request.POST.get('nombre')
+        descripcion=request.POST.get('descripcion')
+        imagen=request.FILES.get('imagen')
+        if not imagen:
+            error_message='Ingrese una imagen'
+        elif Sala.objects.filter(nombre=nombre).exists():
+            error_message='La sala ya existe'
+        if error_message==None:
+            try:
+                Sala.objects.create(
+                    nombre=nombre,
+                    descripcion=descripcion,
+                    imagen=imagen
+                )
+                return redirect('administrator:admin_salas')
+            except Exception as e:
+                error_message=f'Error al guardar la sala: {e}'
+    salas=Sala.objects.all()
+    context={
+        'salas':salas
+    }
+    return render(request,'administrator/admin_salas.html',context)
 
 ### CRUD PELICULAS
 @user_passes_test(es_admin, login_url='/login/')
 def admin_peliculas(request):
-    
-    peliculas=Pelicula.objects.all()
+    error_message=None
+    if request.method=='POST':
+        nombre=request.POST.get('nombre')
+        sinopsis=request.POST.get('sinopsis')
+        restriccion=request.POST.get('restriccion')
+        duracion_str=request.POST.get('duracion')
+        fecha_estreno=request.POST.get('fecha_estreno')
+        imagen=request.FILES.get('imagen')
+        generos=request.POST.getlist('generos')
+        salas=request.POST.getlist('salas')
+        duracion_minutos=None
+        try:
+            duracion_minutos=int(duracion_str)
+            if not imagen:
+                error_message='Ingrese una imagen'
+            elif not generos:
+                error_message='Seleccione al menos un genero'
+        except (ValueError,TypeError):
+            error_message='Ingrese un formato valido para la duracion'
+        if error_message==None:
+            try:
+                pelicula=Pelicula.objects.create(
+                    nombre=nombre,
+                    sinopsis=sinopsis,
+                    restriccion=restriccion,
+                    duracion_minutos=duracion_minutos,
+                    fecha_estreno=fecha_estreno,
+                    imagen=imagen
+                )
+                pelicula.generos.set(generos)
+                pelicula.salas.set(salas)
+                return redirect('administrator:admin_peliculas')
+            except Exception as e:
+                error_message=f'Error al guardar la pelicula: {e}'
+    peliculas=Pelicula.objects.all().order_by('nombre')
+    generos=Genero.objects.all()
+    salas=Sala.objects.all()
     context={
-        'peliculas': peliculas
+        'peliculas':peliculas,
+        'generos':generos,
+        'salas':salas,
+        'error':error_message
     }
     return render(request,'administrator/admin_peliculas.html',context)
+
+### CRUD GENEROS
+@user_passes_test(es_admin, login_url='/login/')
+def admin_generos(request):
+    if request.method=='POST':
+        nombre=request.POST.get('nombre')
+        descripcion=request.POST.get('descripcion')
+        if not nombre:
+            error_message='Ingrese un nombre'
+        elif Genero.objects.filter(nombre=nombre).exists():
+            error_message='El genero ya existe'
+        if error_message==None:
+
+            try:
+                Genero.objects.create(
+                    nombre=nombre,
+                    descripcion=descripcion
+                )
+                return redirect('administrator:admin_generos')
+            except Exception as e:
+                error_message=f'Error al guardar el genero: {e}'
+    generos=Genero.objects.all().order_by('nombre')
+    context={
+        'generos':generos
+    }
+    return render(request,'administrator/admin_generos.html',context)
+
+
 
 ### CRUD ANUNCIOS
 @user_passes_test(es_admin, login_url='/login/')

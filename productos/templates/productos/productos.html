@@ -8,69 +8,27 @@
 
 {% block content %}
 <main>
-        <h2 class="titulo">Menú de Confitería</h2>
+    <h2 class="titulo">Menú de Confitería</h2>
+    
+    {% regroup productos by categoria as productos_por_categoria %}
 
-        <section class="categoria">
-            <h3>Canchita</h3>
-            <div class="productos">
-                <div class="item">
-                    <img src="recursos/Canchita Mediana.jpeg" alt="Canchita pequeña">
-                    <p>Canchita mediana</p>
-                    <span>Precio: S/ 17.40</span>
-                </div>
-                <div class="item">
-                    <img src="recursos/Canchita Grande.jpeg" alt="Canchita mediana">
-                    <p>Canchita grande</p>
-                    <span>Precio: S/ 19.90</span>
-                </div>
-                <div class="item">
-                    <img src="recursos/Canchita Gigante.jpeg" alt="Canchita grande">
-                    <p>Canchita gigante</p>
-                    <span>Precio: S/ 24.90</span>
-                </div>
+    {% for group in productos_por_categoria %}
+    <section class="categoria">
+        <h3>{{ group.grouper|lower|capfirst }}</h3>
+        
+        <div class="productos">
+        {% for producto in group.list %}
+            <div class="item">
+                <img src="{{ producto.imagen.url}}" alt="{{ producto.nombre }}">
+                <p>{{ producto.nombre }}</p>
+                <span>Precio: S/. {{ producto.precio }}</span>
             </div>
-        </section>
-
-        <section class="categoria">
-            <h3>Bebidas</h3>
-            <div class="productos">
-                <div class="item">
-                    <img src="recursos/Gaseosa pequeña.jpeg" alt="Gaseosa pequeña">
-                    <p>Gaseosa pequeña</p>
-                    <span>Precio: S/ 8.00</span>
-                </div>
-                <div class="item">
-                    <img src="recursos/Gaseosa Mediana.jpeg" alt="Gaseosa mediana">
-                    <p>Gaseosa mediana</p>
-                    <span>Precio: S/ 11.40</span>
-                </div>
-                <div class="item">
-                    <img src="recursos/Gaseosa Grande.jpeg" alt="Gaseosa grande">
-                    <p>Gaseosa grande</p>
-                    <span>Precio: S/ 13.10</span>
-                </div>
-            </div>
-        </section>
-
-        <section class="categoria">
-            <h3>Snacks</h3>
-            <div class="productos">
-                <div class="item">
-                    <img src="recursos/MM.jpeg" alt="M&M">
-                    <p>M&M</p>
-                    <span>Precio: S/ 5.00</span>
-                </div>
-                <div class="item">
-                    <img src="recursos/Nachos con Queso.jpeg" alt="Nachos">
-                    <p>Nachos con queso</p>
-                    <span>Precio: S/ 7.00</span>
-                </div>
-                <div class="item">
-                    <img src="recursos/Frankfurter.jpeg" alt="Hot dog">
-                    <p>Frankfurter</p>
-                    <span>Precio: S/ 9.00</span>
-                </div>
-            </div>
-        </section>
+        {% empty %}
+            <p>No hay productos disponibles en esta categoría.</p>
+        {% endfor %}
+        </div>
+    </section>
+    {% endfor %}
+    
     </main>
 {% endblock %}

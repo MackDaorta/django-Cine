@@ -1,0 +1,115 @@
+{% extends 'core/base.html' %} {% load static %} {% block title %}Inicio -
+Cinemark{% endblock %} {% block page_css %}
+<link
+  rel="stylesheet"
+  href="{% static 'administrator/admin_peliculas.css' %}"
+/>
+{% endblock %} {% block content %}
+<div class="centro">
+  <h2 class="titulo">Gestion de peliculas</h2>
+  <div class="form-container">
+    <form id="productForm" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="nombre">Nombre de la pelicula:</label>
+        <input type="text" id="nombre" name="nombre" required />
+      </div>
+      <div class="form-group">
+        <label for="sinopsis">Sinopsis:</label>
+        <textarea id="sinopsis" name="sinopsis" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="duracion">Duracion (minutos):</label>
+        <input type="text" id="duracion" name="duracion" required />
+      </div>
+      <div class="form-group">
+        <label for="imagen">Imagen:</label>
+        <input type="file" id="imagen" name="imagen" required />
+      </div>
+      <div class="form-group">
+        <label for="fecha_estreno">Fecha de estreno:</label>
+        <input type="date" id="fecha_estreno" name="fecha_estreno" required />
+      </div>
+      <div class="from-group">
+        <label for="restriccion">Restriccion</label>
+        <select id="restriccion" name="restriccion" required>
+          <option value="">Seleccione la restriccion</option>
+          <option value="APT">APT</option>
+          <option value="+14">+14</option>
+          <option value="+18">+18</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="generos">Genero</label>
+        <select id="generos" name="generos" multiple required>
+          <option value="">Seleccione el genero</option>
+          {% for genero in generos %}
+          <option value="{{ genero.id }}">{{ genero.nombre }}</option>
+          {% endfor %}
+        </select>
+        <small> Mantén CTRL para seleccionar mas de un genero</small>
+      </div>
+      <div class="form-group">
+        <label for="salas">Sala</label>
+        <select id="salas" name="salas" multiple required>
+          <option value="">Seleccione la sala</option>
+          {% for sala in salas %}
+          <option value="{{ sala.id }}">{{ sala.nombre }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <button type="submit" class="btn-action">Agregar Pelicula</button>
+      {% if error %}
+      <p style="color: red; margin-top: 10px">{{ error }}</p>
+      {% endif %}
+    </form>
+  </div>
+  <div class="peliculas-list">
+    <h2>Lista de Peliculas</h2>
+    <div id="peliculasContainer">
+      {% for pelicula in peliculas %}
+      <div class="pelicula-item">
+        <span class="peliculas-info">
+          <img
+            src="{{ pelicula.imagen.url }}"
+            alt="{{ pelicula.nombre }}"
+            class="pelicula-image"
+          />
+          {{ pelicula.nombre }} \n
+            {{ pelicula.duracion }}\n 
+            {{ pelicula.restriccion }}\n
+            {{ pelicula.fecha_estreno }}\n
+            {{ pelicula.sinopsis }}\n
+            {% for genero in pelicula.generos.all %}
+              {{ genero.nombre }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}\n
+            {% for sala in pelicula.salas.all %}
+              {{ sala.nombre }}\n
+              {% if not forloop.last %}, {% endif %}
+            {% endfor %}
+        </span>
+        <div class="actions">
+          <a
+            href="{% url 'administrator:admin_peliculas_editar' pelicula.id %}"
+            class="btn-edit"
+            >Editar</a
+          >
+          <form
+            action="{% url 'administrator:admin_peliculas_eliminar' pelicula.id %}"
+            method="POST"
+            style="display: inline"
+            onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta pelicula?');"
+          >
+            {% csrf_token %}
+            <button type="submit" class="btn-delete">Eliminar</button>
+          </form>
+        </div>
+      </div>
+      {% empty %}
+      <p>No hay peliculas registradas todavía.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

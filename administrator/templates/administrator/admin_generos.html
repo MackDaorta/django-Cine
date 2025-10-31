@@ -1,0 +1,60 @@
+{% extends 'core/base.html' %} {% load static %} {% block title %}Inicio -
+Cinemark{% endblock %} {% block page_css %}
+<link
+  rel="stylesheet"
+  href="{% static 'administrator/admin_generos.css' %}"
+/>
+{% endblock %} {% block content %}
+<div class="centro">
+  <h2 class="titulo">Gestion de generos</h2>
+  <div class="form-container">
+    <form id="productForm" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="nombre">Nombre del genero:</label>
+        <input type="text" id="nombre" name="nombre" required />
+      </div>
+      <div class="form-group">
+        <label for="sinopsis">Descripcion:</label>
+        <textarea id="descripcion" name="descripcion"></textarea>
+      </div>
+
+      <button type="submit" class="btn-action">Agregar genero</button>
+      {% if error %}
+      <p style="color: red; margin-top: 10px">{{ error }}</p>
+      {% endif %}
+    </form>
+  </div>
+  <div class="generos-list">
+    <h2>Lista de generos</h2>
+    <div id="peliculasContainer">
+      {% for genero in generos %}
+      <div class="genero">
+        <span class="genero-info">
+        {{ genero.nombre }} \n
+        {{ genero.descripcion }} 
+        </span>
+        <div class="actions">
+          <a
+            href="{% url 'administrator:admin_genero_editar' genero.id %}"
+            class="btn-edit"
+            >Editar</a
+          >
+          <form
+            action="{% url 'administrator:admin_genero_eliminar' genero.id %}"
+            method="POST"
+            style="display: inline"
+            onsubmit="return confirm('¿Estás seguro de que quieres eliminar este genero?');"
+          >
+            {% csrf_token %}
+            <button type="submit" class="btn-delete">Eliminar</button>
+          </form>
+        </div>
+      </div>
+      {% empty %}
+      <p>No hay generos registrados todavía.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

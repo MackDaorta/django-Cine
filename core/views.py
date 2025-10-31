@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login as auth_login, logout as aut
 from django.urls import reverse
 from decimal import Decimal,InvalidOperation
 from administrator.models import Anuncio
-from peliculas.models import Salas
+from peliculas.models import Sala
 
 
 
@@ -22,7 +22,7 @@ def conocenos(request):
     return render(request, 'core/conocenos.html')
 
 def sala(request):
-    lista_salas=Salas.objects.all()
+    lista_salas=Sala.objects.all()
     context={
         'salas':lista_salas
     }
