@@ -36,8 +36,11 @@ input {
   border-radius: 6px;
 }
 
-button {
-  padding: 12px;
+.btn-action,button {
+  display: inline-block;
+  text-align: center;
+  padding: 10px;
+  text-decoration: none;
   background-color: #850F0F;
   color: white;
   font-weight: bold;

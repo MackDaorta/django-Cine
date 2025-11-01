@@ -1,10 +1,14 @@
-{% extends 'core/base.html' %} {% load static %} {% block title %}Inicio -
-Cinemark{% endblock %} {% block page_css %}
-<link
-  rel="stylesheet"
-  href="{% static 'administrator/admin_generos.css' %}"
-/>
-{% endblock %} {% block content %}
+{% extends 'core/base.html' %}
+{% load static %} 
+
+{% block title %}Gestión de generos{% endblock %}
+{% block page_css %}
+<link rel="stylesheet" href="{% static 'administrator/style.css'  %}"> 
+<link rel="stylesheet" href="{% static 'administrator/admin.css' %}">
+<link rel="stylesheet" href="{% static 'administrator/admin_generos.css' %}">
+{% endblock %}
+
+{% block content %}
 <div class="centro">
   <h2 class="titulo">Gestion de generos</h2>
   <div class="form-container">
@@ -27,12 +31,13 @@ Cinemark{% endblock %} {% block page_css %}
   </div>
   <div class="generos-list">
     <h2>Lista de generos</h2>
-    <div id="peliculasContainer">
+    <div id="generosContainer">
       {% for genero in generos %}
       <div class="genero">
         <span class="genero-info">
-        {{ genero.nombre }} \n
-        {{ genero.descripcion }} 
+        {{ genero.nombre }} 
+        <br>
+        <small>{{ genero.descripcion }}</small> 
         </span>
         <div class="actions">
           <a

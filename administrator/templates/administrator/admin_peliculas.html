@@ -76,16 +76,22 @@ Cinemark{% endblock %} {% block page_css %}
             alt="{{ pelicula.nombre }}"
             class="pelicula-image"
           />
-          {{ pelicula.nombre }} \n
-            {{ pelicula.duracion }}\n 
-            {{ pelicula.restriccion }}\n
-            {{ pelicula.fecha_estreno }}\n
-            {{ pelicula.sinopsis }}\n
+          {{ pelicula.nombre }} 
+          <br>
+            {{ pelicula.duracion }}
+          <br>
+            {{ pelicula.restriccion }}
+          <br>
+            {{ pelicula.fecha_estreno }}
+          <br>
+            {{ pelicula.sinopsis }}
+            <br>
+            Generos:
             {% for genero in pelicula.generos.all %}
-              {{ genero.nombre }}{% if not forloop.last %}, {% endif %}
-            {% endfor %}\n
+              {{ genero.nombre }}<br>{% if not forloop.last %}, {% endif %}
+            {% endfor %}
             {% for sala in pelicula.salas.all %}
-              {{ sala.nombre }}\n
+              {{ sala.nombre }}<br>
               {% if not forloop.last %}, {% endif %}
             {% endfor %}
         </span>

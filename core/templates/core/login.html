@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Cinemark</title>
+  <title>Login </title>
   <link rel="stylesheet" href="{% static 'core/login.css' %}">
 </head>
 <body>
@@ -15,6 +15,7 @@
     <input type="text" id="usuario" name="username" placeholder="Usuario" required>
     <input type="password" id="clave" name="password" placeholder="Contraseña" required>
     <button type="submit">Ingresar</button>
+    <a class="btn-action" href="{% url 'core:registro' %}">Registrarse</a>
     </form>
     {% if error %}
     <p style="color: red;text-align: center;margin-top: 15px;">{{ error }}</p>

@@ -1,9 +1,11 @@
-{% extends 'core/base.html' %} {% load static %} {% block title %}Inicio -
-Cinemark{% endblock %} {% block page_css %}
-<link
-  rel="stylesheet"
-  href="{% static 'administrator/admin_salas.css' %}"
-/>
+{% extends 'core/base.html' %}
+{% load static %} 
+
+{% block title %}Gestión de Salas{% endblock %}
+{% block page_css %}
+<link rel="stylesheet" href="{% static 'administrator/style.css'  %}"> 
+<link rel="stylesheet" href="{% static 'administrator/admin.css' %}">
+<link rel="stylesheet" href="{% static 'administrator/admin_salas.css' %}">
 {% endblock %} {% block content %}
 <div class="centro">
   <h2 class="titulo">Gestion de salas</h2>
@@ -44,17 +46,18 @@ Cinemark{% endblock %} {% block page_css %}
             alt="{{ sala.nombre }}"
             class="sala-image"
           />
-          {{ sala.nombre }} \n
-            {{ sala.descripcion }}\n 
+          {{ sala.nombre }}
+          <br>
+            <small>{{ sala.descripcion }}</small> 
         </span>
         <div class="actions">
           <a
-            href="{% url 'administrator:admin_sala_editar' sala.id %}"
+            href="{% url 'administrator:admin_salas_editar' sala.id %}"
             class="btn-edit"
             >Editar</a
           >
           <form
-            action="{% url 'administrator:admin_sala_eliminar' sala.id %}"
+            action="{% url 'administrator:admin_salas_eliminar' sala.id %}"
             method="POST"
             style="display: inline"
             onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta sala?');"

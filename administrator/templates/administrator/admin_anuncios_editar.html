@@ -14,13 +14,13 @@
 <body>
 <main class="main-content">
     <div class="form-container">
-        <h2>Creación y Edición de Anuncios</h2>
+        <h2>Edición de Anuncio</h2>
 
         <form id="form-promocion" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group">
-            <label for="titulo">Título del Anuncio (Ej: 2x1 en Confitería)</label>
-            <input type="text" id="titulo" name='nombre' placeholder="Ingrese título" required>
+            <label for="titulo">Título del Anuncio: {{anuncio.nombre}}</label>
+            <input type="text" id="titulo" name='nombre' placeholder="Ingrese título" value="{{ anuncio.nombre }}" required>
         </div>
 
         <div class="form-group">
@@ -34,39 +34,20 @@
 
         <div class="form-group">
             <label for="imagen-file">Subir Archivo de Imagen:</label>
-            <input type="file" id="imagen-file" name="imagen" accept="image/*" required>
+            <input type="file" id="imagen-file" name="imagen" accept="image/*" value="{{anuncio.imagen}}">
         </div>
         <div class="form-group">
             <label for="link">Link</label>
-            <input type="url" id="link" name="link"></input>
+            <input type="url" id="link" name="link" value="{{anuncio.link}}"></input>
         </div>
 
         <div class="form-group">
             <label for="vigencia">Fecha de Vigencia (opcional)</label>
-            <input type="date" id="vigencia" name="vigencia">
+            <input type="date" id="vigencia" name="vigencia" value="anuncio.vigencia">
         </div>
         
         <button type="submit" class="btn-action">Guardar Promoción</button>
-        </form>
-
-        <div class="promotions-list">
-        <h2>Promociones Activas</h2>
-        
-        {% for anuncio in anuncios %}
-            <div class="promotion-item">
-                <span>{{ anuncio.nombre }}</span>
-                <div class="actions">
-                    <form action="{% url 'administrator:admin_anuncio_eliminar' anuncio.id %}" method="POST" style="display: inline;" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este anuncio?');">
-        {% csrf_token %}
-        <a href="{% url 'administrator:admin_anuncios_editar' anuncio.id %}" class="btn-edit">Editar</a>
-        <button type="submit" class="btn-delete">Eliminar</button>
-    </form>
-                </div>
-            </div>
-        {% empty %}
-        <p> No hay anuncios creados todavia</p>
-        {% endfor %}
-        
+        </form>        
         </div>
     </div>
 </main>
